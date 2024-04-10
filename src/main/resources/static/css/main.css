@@ -1,0 +1,25 @@
+/* This stylesheet hides all input warnings by default using their IDs to do so */
+
+#invalid-ticket {
+    display: none;
+}
+
+#invalid-first-name {
+    display: none;
+}
+
+#invalid-last-name {
+    display: none;
+}
+
+#invalid-phone-number {
+    display: none;
+}
+
+#invalid-mail {
+    display: none;
+}
+
+
+/* I know I could have just used javascript to write the messages and drop the css document,
+    but I wanted to use JQuery's show() and hide() */

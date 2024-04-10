@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple window where you can register movie tickets">
+    <title>ShrekCinema</title>
+
+
+    <!-- Stylesheets, one links to bootstrap 4.3.1, the other a local css stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Scripts, one links to JQuery the other a local script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/javascript.js" defer></script>
+
+</head>
+
+<body class="bg-light container">
+
+    <h1>Shrek Cinema</h1>
+
+    <!-- Section containing inputs and a select for purchase information -->
+    <section>
+
+        <div class="form-group">
+            <label for="movie">Movie and number of tickets:</label>
+
+            <div class="input-group">
+                <!-- this is the movie select element, it lets you choose between four movies -->
+                <select class="form-control" id="movie" title="Choose the movie you want to watch"></select>
+
+                <!-- this is the Tickets input element, it only accepts integers that are 1 or higher -->
+                <input type="number" class="form-control rounded-right" id="tickets" value="1"
+                       title="Write amount of tickets you want to buy here" min="1">
+            </div>
+
+            <small class="form-text text-danger" id="invalid-ticket">Please enter a valid number</small>
+        </div>
+
+
+        <!-- this is the First name input element, it only accepts values that consists of 2 or more letters -->
+        <div class="form-group">
+            <label for="first-name">First name:</label>
+            <input type="text" class="form-control" id="first-name" placeholder="Name" title="Write your first name here"
+                   pattern="[a-zæøåA-ZÆØÅ]{2,}">
+
+            <small class="form-text text-danger" id="invalid-first-name">Please enter a valid first name</small>
+        </div>
+
+
+        <!-- this is the Last name input element, it only accepts values that consists of 2 or more letters -->
+        <div class="form-group">
+            <label for="last-name">Last name:</label>
+            <input type="text" class="form-control" id="last-name" placeholder="Namington" title="Write your last name here"
+                   pattern="[a-zæøåA-ÅÆØÅ]{2,}">
+
+            <small class="form-text text-danger" id="invalid-last-name">Please enter a valid last name</small>
+        </div>
+
+
+        <!-- this is the Phone number input element -->
+        <!-- it only accepts values that consists of 8 digits where the first digit is not 0 -->
+        <div class="form-group">
+            <label for="phone-number">Phone number:</label>
+            <input type="tel" class="form-control" id="phone-number" placeholder="12345678" title="Write your phone number here"
+                       pattern="[1-9]{1}[\d]{7}">
+
+            <small class="form-text text-danger" id="invalid-phone-number">Please enter a valid phone number</small>
+        </div>
+
+
+        <!-- this is the Mail input element, it only accepts emails -->
+        <div class="form-group">
+            <label for="mail">Email:</label>
+            <input type="email" class="form-control" id="mail" placeholder="name@example.com" title="Write your email here"
+                   pattern="[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,3}">
+
+            <small class="form-text text-danger" id="invalid-mail">Please enter a valid email</small>
+        </div>
+
+
+        <button class="btn btn-primary" onclick="inputValidation()">Register purchase</button>
+
+        <button class="btn btn-danger" onclick="removePurchases()">Remove purchases</button>
+
+    </section>
+
+
+    <section class="pt-4">
+
+        <h2>All registered purchases:</h2>
+
+        <!-- Table for registered purchases (the Registered purchases table) -->
+        <table class="table table-active table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Movie:</th>
+                    <th>Tickets:</th>
+                    <th>Name:</th>
+                    <th>Last name:</th>
+                    <th>Phone number:</th>
+                    <th>Email:</th>
+                </tr>
+            </thead>
+            <tbody id="registered-purchases"></tbody>
+        </table>
+
+    </section>
+
+</body>
+
+</html>
