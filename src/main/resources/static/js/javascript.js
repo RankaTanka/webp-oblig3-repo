@@ -1,14 +1,19 @@
-// JS for all functions used in index.html
+// javascript for all functions used in index.html
 
+
+/* PAGE INITIALIZATION FUNCTION IS BELOW */
 
 // When the page is loaded the select list and all purchases are written
-
-// Look below at the getMovies() and writePurchases() functions for more details
 $(function() {
     getMovies();
     writePurchases();
 });
 
+// Look below at the getMovies() and writePurchases() functions for more details about the functions
+
+
+
+/* INPUT VALIDATION FUNCTION IS BELOW */
 
 // Function that retrieves information, then writes it into the Registered purchases table
 function inputValidation() {
@@ -108,6 +113,9 @@ function inputValidation() {
     }
 }
 
+
+
+/* ALL GET AND POST FUNCTIONS ARE BELOW */
 
 // A function that saves a purchase on the server
 function saveInfo(ticketInput, firstNameInput, lastNameInput, phoneNumberInput, mailInput) {
