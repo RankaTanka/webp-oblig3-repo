@@ -31,7 +31,7 @@ public class PurchaseRepository {
     }
 
     // returns a list of all rows in the Purchases database as Purchase objects sorted by lastName
-    public List<Purchase> getPurchases() {
+    public List<Purchase> getAllPurchases() {
 
         String sql = "SELECT * FROM Purchases ORDER BY lastName";
 

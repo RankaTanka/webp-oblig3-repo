@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <!-- Scripts, one links to JQuery the other a local script -->
+    <!-- Scripts, one links to JQuery the three other are local scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/javascript.js" defer></script>
+    <script src="js/index-initialization.js" defer></script>
+    <script src="js/input-validation.js" defer></script>
+    <script src="js/server-communication.js" defer></script>
 
 </head>
 
@@ -90,6 +92,9 @@
 
         <!-- button which when pressed runs the deleteAllPurchases() function -->
         <button class="btn btn-danger" onclick="deleteAllPurchases()">Remove purchases</button>
+
+        <!-- The XXXValidation() functions are located in input-validation.js -->
+        <!-- savePurchase() and deleteAllPurchases() are located in server-communication.js -->
 
     </section>
 

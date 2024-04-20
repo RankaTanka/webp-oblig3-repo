@@ -25,10 +25,10 @@ public class PurchaseController {
     }
 
     // sends all registered purchases back to the view-side
-    @GetMapping("/getPurchases")
-    public List<Purchase> getPurchases() {
+    @GetMapping("/getAllPurchases")
+    public List<Purchase> getAllPurchases() {
 
-        return repository.getPurchases();
+        return repository.getAllPurchases();
 
     }
 
