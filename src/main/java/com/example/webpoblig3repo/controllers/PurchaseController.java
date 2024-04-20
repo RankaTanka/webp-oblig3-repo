@@ -4,10 +4,7 @@ import com.example.webpoblig3repo.model.Purchase;
 import com.example.webpoblig3repo.repository.PurchaseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +45,14 @@ public class PurchaseController {
     public void deletePurchase(Long id) {
         System.out.println(id);
         repository.deletePurchase(id);
+
+    }
+
+    // updates selected purchase
+    @PutMapping("/updatePurchase")
+    public void updatePurchase(Purchase purchase) {
+
+        repository.updatePurchase(purchase);
 
     }
 

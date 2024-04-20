@@ -12,8 +12,18 @@ public class Purchase {
 
     public Purchase() {}
 
-    // Constructor does not contain id. This is so I can properly post a Purchase and id is decided by AUTO_INCREMENT
+    // Constructor without id, used when saving a Purchase since id is decided by AUTO_INCREMENT
     public Purchase(String movie, int ticketAmount, String firstName, String lastName, String phoneNumber, String mail) {
+        this.movie = movie;
+        this.ticketAmount = ticketAmount;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.mail = mail;
+    }
+
+    // Constructor with id, used when updating a Purchase since id is needed to know which Purchase to update
+    public Purchase(Long id, String movie, int ticketAmount, String firstName, String lastName, String phoneNumber, String mail) {
         this.movie = movie;
         this.ticketAmount = ticketAmount;
         this.firstName = firstName;

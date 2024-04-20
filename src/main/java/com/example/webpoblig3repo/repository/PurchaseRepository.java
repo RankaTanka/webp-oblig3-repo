@@ -39,7 +39,7 @@ public class PurchaseRepository {
 
     }
 
-    // deletes all purchases from the Purchases database
+    // deletes all Purchases from the Purchases database
     public void deleteAllPurchases() {
 
         String sql = "DELETE FROM Purchases";
@@ -48,12 +48,22 @@ public class PurchaseRepository {
 
     }
 
-    // deletes all purchases from the Purchases database
+    // deletes all Purchases from the Purchases database
     public void deletePurchase(Long id) {
 
         String sql = "DELETE FROM Purchases WHERE id = ?";
 
         database.update(sql, id);
+
+    }
+
+    // updates a selected Purchase
+    public void updatePurchase(Purchase purchase) {
+
+        String sql = "UPDATE Purchases SET movie=?, ticketAmount=?, firstName=?, lastName=?, phoneNumber=?, mail=? WHERE id=?";
+
+        database.update(sql, purchase.getMovie(), purchase.getTicketAmount(), purchase.getFirstName(),
+                purchase.getLastName(), purchase.getPhoneNumber(), purchase.getMail(), purchase.getId());
 
     }
 
