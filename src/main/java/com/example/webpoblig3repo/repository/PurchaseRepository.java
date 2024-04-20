@@ -30,6 +30,15 @@ public class PurchaseRepository {
 
     }
 
+    // returns a list of all rows in the Purchases database as Purchase objects sorted by lastName
+    public List<Purchase> getPurchases() {
+
+        String sql = "SELECT * FROM Purchases ORDER BY lastName";
+
+        return database.query(sql, new BeanPropertyRowMapper<>(Purchase.class));
+
+    }
+
     // deletes all purchases from the Purchases database
     public void deletePurchases() {
 
@@ -39,12 +48,12 @@ public class PurchaseRepository {
 
     }
 
-    // returns a list of all rows in the Purchases database as Purchase objects sorted by lastName
-    public List<Purchase> getPurchases() {
+    // deletes all purchases from the Purchases database
+    public void deletePurchase(Long id) {
 
-        String sql = "SELECT * FROM Purchases ORDER BY lastName";
+        String sql = "DELETE FROM Purchases WHERE id = ?";
 
-        return database.query(sql, new BeanPropertyRowMapper<>(Purchase.class));
+        database.update(sql, id);
 
     }
 

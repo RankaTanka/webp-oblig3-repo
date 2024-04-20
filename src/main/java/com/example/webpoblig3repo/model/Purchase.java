@@ -2,6 +2,7 @@ package com.example.webpoblig3repo.model;
 
 // A POJO for a Purchase
 public class Purchase {
+    private Long id;
     private String movie;
     private int ticketAmount;
     private String firstName;
@@ -11,6 +12,7 @@ public class Purchase {
 
     public Purchase() {}
 
+    // Constructor does not contain id. This is so I can properly post a Purchase and id is decided by AUTO_INCREMENT
     public Purchase(String movie, int ticketAmount, String firstName, String lastName, String phoneNumber, String mail) {
         this.movie = movie;
         this.ticketAmount = ticketAmount;
@@ -18,6 +20,14 @@ public class Purchase {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.mail = mail;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setMovie(String movie) {

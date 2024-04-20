@@ -115,7 +115,7 @@ function inputValidation() {
 
 
 
-/* ALL GET AND POST FUNCTIONS ARE BELOW */
+/* ALL GET, POST AND DELETE FUNCTIONS ARE BELOW */
 
 // A function that saves a purchase on the server
 function saveInfo(ticketInput, firstNameInput, lastNameInput, phoneNumberInput, mailInput) {
@@ -164,6 +164,8 @@ function writePurchases() {
                 "<td>" + purchase.lastName + "</td>" +
                 "<td>" + purchase.phoneNumber + "</td>" +
                 "<td>" + purchase.mail + "</td>" +
+                "<td><button class='btn btn-danger' value='" + purchase.id +
+                "' onclick='deletePurchase(this.value)'>Delete</button></td>"+
                 "</tr>";
 
         }
@@ -179,8 +181,34 @@ function writePurchases() {
 function removePurchases() {
 
     // deletes all purchases and then runs writePurchases() so the table is emptied
-    $.post("/deletePurchases", function() {
+    $.ajax({
+
+        url: "/deletePurchases",
+        type: "DELETE",
+
+    }).done(function() {
+
         writePurchases();
+
+    });
+
+}
+
+// Function that deletes a chosen purchase
+function deletePurchase(id) {
+
+    const url = "/deletePurchase?id=" + id;
+
+    // Deletes selected purchase and runs writePurchases
+    $.ajax({
+
+        url: url,
+        type: "DELETE"
+
+    }).done(function() {
+
+        writePurchases();
+
     });
 
 }
