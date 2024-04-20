@@ -1,6 +1,6 @@
 /* This stylesheet hides all input warnings by default using their IDs to do so */
 
-#invalid-ticket {
+#invalid-ticket-amount {
     display: none;
 }
 

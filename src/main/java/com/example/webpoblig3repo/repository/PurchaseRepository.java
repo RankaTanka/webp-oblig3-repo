@@ -40,7 +40,7 @@ public class PurchaseRepository {
     }
 
     // deletes all purchases from the Purchases database
-    public void deletePurchases() {
+    public void deleteAllPurchases() {
 
         String sql = "DELETE FROM Purchases";
 

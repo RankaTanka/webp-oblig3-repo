@@ -36,10 +36,10 @@ public class PurchaseController {
     }
 
     // deletes all registered purchases
-    @DeleteMapping("/deletePurchases")
-    public void deletePurchases() {
+    @DeleteMapping("/deleteAllPurchases")
+    public void deleteAllPurchases() {
 
-        repository.deletePurchases();
+        repository.deleteAllPurchases();
 
     }
 

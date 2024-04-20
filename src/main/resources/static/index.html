@@ -35,11 +35,11 @@
                 <select class="form-control" id="movie" title="Choose the movie you want to watch"></select>
 
                 <!-- this is the Tickets input element, it only accepts integers that are 1 or higher -->
-                <input type="number" class="form-control rounded-right" id="tickets" value="1"
+                <input type="number" class="form-control rounded-right" id="ticket-amount" value="1"
                        title="Write amount of tickets you want to buy here" min="1">
             </div>
 
-            <small class="form-text text-danger" id="invalid-ticket">Please enter a valid number</small>
+            <small class="form-text text-danger" id="invalid-ticket-amount">Please enter a valid number</small>
         </div>
 
 
@@ -83,10 +83,13 @@
             <small class="form-text text-danger" id="invalid-mail">Please enter a valid email</small>
         </div>
 
+        <!-- button which when pressed runs the savePurchase() function with all the validation functions -->
+        <!-- (it tries to save a purchase if all inputs are valid) -->
+        <button class="btn btn-primary" onclick="savePurchase(ticketAmountValidation(), firstNameValidation(),
+               lastNameValidation(), phoneNumberValidation(), mailValidation())">Register purchase</button>
 
-        <button class="btn btn-primary" onclick="inputValidation()">Register purchase</button>
-
-        <button class="btn btn-danger" onclick="removePurchases()">Remove purchases</button>
+        <!-- button which when pressed runs the deleteAllPurchases() function -->
+        <button class="btn btn-danger" onclick="deleteAllPurchases()">Remove purchases</button>
 
     </section>
 

@@ -15,6 +15,142 @@ $(function() {
 
 /* INPUT VALIDATION FUNCTION IS BELOW */
 
+// function that validates the ticket-amount input field and returns a boolean value
+function ticketAmountValidation() {
+
+    const ticketAmountInput = $("#ticket-amount");
+
+    // boolean validation check, if valid it's set to false
+    let ticketAmountValidation = document.getElementById("ticket-amount").validity.rangeUnderflow;
+
+    // Checking if the Tickets input value is valid,
+    // if not ticketValidation is set to true and a message is shown
+    if (ticketAmountInput.val() === "" || Math.round(Number(ticketAmountInput.val())) !== Number(ticketAmountInput.val()) ||
+        ticketAmountValidation === true) {
+
+        ticketAmountValidation = true;
+
+        ticketAmountInput.val(1);
+        $("#invalid-ticket-amount").show();
+    }
+    // Every time the input is valid the message gets removed
+    else {
+        $("#invalid-ticket-amount").hide();
+    }
+
+
+    return ticketAmountValidation;
+
+}
+
+// function that validates the first-name input field and returns a boolean value
+function firstNameValidation() {
+
+    const firstNameInput = $("#first-name");
+
+    // boolean validation check, if valid it's set to false
+    let firstNameValidation = document.getElementById("first-name").validity.patternMismatch;
+
+    // Checking if the First name input value is valid,
+    // if not firstNameValidation is forcefully set to true and a message is shown
+    if (firstNameInput.val() === "" || firstNameValidation === true) {
+
+        firstNameValidation = true;
+
+        firstNameInput.val(null);
+        $("#invalid-first-name").show();
+
+    }
+    else {
+        $("#invalid-first-name").hide();
+    }
+
+
+    return firstNameValidation;
+
+}
+
+// function that validates the last-name input field and returns a boolean value
+function lastNameValidation() {
+
+    const lastNameInput = $("#last-name");
+
+    // boolean validation check, if valid it's set to false
+    let lastNameValidation = document.getElementById("last-name").validity.patternMismatch;
+
+    // Checking if the Last name input value is valid,
+    // if not lastNameValidation is forcefully set to true and a message is shown
+    if (lastNameInput.val() === "" || lastNameValidation === true) {
+
+        lastNameValidation = true;
+
+        lastNameInput.val(null);
+        $("#invalid-last-name").show();
+
+    }
+    else {
+        $("#invalid-last-name").hide();
+    }
+
+
+    return lastNameValidation;
+
+}
+
+// function that validates the phone-number input field and returns a boolean value
+function phoneNumberValidation() {
+
+    const phoneNumberInput = $("#phone-number");
+
+    // boolean validation check, if valid it's set to false
+    let phoneNumberValidation = document.getElementById("phone-number").validity.patternMismatch;
+
+    // Checking if the Phone number input value is valid,
+    // if not phoneNumberValidation is forcefully set to true and a message is shown
+    if (phoneNumberInput.val() === "" || phoneNumberValidation === true) {
+
+        phoneNumberValidation = true;
+
+        phoneNumberInput.val(null);
+        $("#invalid-phone-number").show();
+
+    }
+    else {
+        $("#invalid-phone-number").hide();
+    }
+
+
+    return phoneNumberValidation;
+
+}
+
+// function that validates the mail input field and returns a boolean value
+function mailValidation() {
+
+    const mailInput = $("#mail");
+
+    // boolean validation check, if valid it's set to false
+    // (I wanted to just use typeMismatch to validate the Mail input, but it accepted values like "bob@gmail")
+    let mailValidation = document.getElementById("mail").validity.patternMismatch;
+
+    // Checking if the Mail input value is valid,
+    // if not mailValidation is forcefully set to true and a message is shown
+    if (mailInput.val() === "" || mailValidation === true) {
+
+        mailValidation = true;
+
+        mailInput.val(null);
+        $("#invalid-mail").show();
+    }
+    else {
+        $("#invalid-mail").hide();
+    }
+
+
+    return mailValidation;
+
+}
+/*
 // Function that retrieves information, then writes it into the Registered purchases table
 function inputValidation() {
 
@@ -24,6 +160,7 @@ function inputValidation() {
     const lastNameInput = $("#last-name");
     const phoneNumberInput = $("#phone-number");
     const mailInput = $("#mail");
+
 
     // A bunch of boolean validation checks, if one is true it is invalid and if one is false it is valid
     let ticketValidation = document.getElementById("tickets").validity.rangeUnderflow;
@@ -48,6 +185,7 @@ function inputValidation() {
     else {
         $("#invalid-ticket").hide();
     }
+
 
     // Checking if the First name input value is valid,
     // if not firstNameValidation is forcefully set to true and a message is shown
@@ -118,30 +256,46 @@ function inputValidation() {
 /* ALL GET, POST AND DELETE FUNCTIONS ARE BELOW */
 
 // A function that saves a purchase on the server
-function saveInfo(ticketInput, firstNameInput, lastNameInput, phoneNumberInput, mailInput) {
-
-    // a javascript object matching the custom java object of Purchase
-    const purchase = {
-        movie : $("#movie").val(),
-        ticketAmount : ticketInput.val(),
-        firstName : firstNameInput.val(),
-        lastName : lastNameInput.val(),
-        phoneNumber : phoneNumberInput.val(),
-        mail : mailInput.val()
-    };
-
-    // posts purchase so that it gets converted to a Purchase object and saved
-    $.post("/savePurchase", purchase, function() {
-        writePurchases();
-    });
+function savePurchase(ticketAmountValidation, firstNameValidation, lastNameValidation,
+                      phoneNumberValidation, mailValidation) {
 
 
-    // resets all input elements
-    ticketInput.val(1);
-    firstNameInput.val(null);
-    lastNameInput.val(null);
-    phoneNumberInput.val(null);
-    mailInput.val(null);
+    // All input elements are given names for easier access
+    const ticketAmountInput = $("#ticket-amount");
+    const firstNameInput = $("#first-name");
+    const lastNameInput = $("#last-name");
+    const phoneNumberInput = $("#phone-number");
+    const mailInput = $("#mail");
+
+
+    // If all the validation functions return false, everything is valid and the purchase can be saved
+    if (!ticketAmountValidation && !firstNameValidation && !lastNameValidation &&
+        !phoneNumberValidation && !mailValidation) {
+
+        // a javascript object matching the custom java object of Purchase
+        const purchase = {
+            movie: $("#movie").val(),
+            ticketAmount: ticketAmountInput.val(),
+            firstName: firstNameInput.val(),
+            lastName: lastNameInput.val(),
+            phoneNumber: phoneNumberInput.val(),
+            mail: mailInput.val()
+        };
+
+        // posts purchase so that it gets converted to a Purchase object and saved
+        $.post("/savePurchase", purchase, function () {
+            writePurchases();
+        });
+
+
+        // resets all input elements
+        ticketAmountInput.val(1);
+        firstNameInput.val(null);
+        lastNameInput.val(null);
+        phoneNumberInput.val(null);
+        mailInput.val(null);
+
+    }
 
 }
 
@@ -178,12 +332,12 @@ function writePurchases() {
 
 
 // Function that restarts the Registered purchases table
-function removePurchases() {
+function deleteAllPurchases() {
 
     // deletes all purchases and then runs writePurchases() so the table is emptied
     $.ajax({
 
-        url: "/deletePurchases",
+        url: "/deleteAllPurchases",
         type: "DELETE",
 
     }).done(function() {
