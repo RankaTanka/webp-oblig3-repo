@@ -4,9 +4,10 @@ import com.example.webpoblig3repo.model.Purchase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.util.List;
 
@@ -19,51 +20,126 @@ public class PurchaseRepository {
     @Autowired
     private JdbcTemplate database;
 
+    // A Logger that reports whenever an error happens
+    Logger logger = LoggerFactory.getLogger(PurchaseRepository.class);
+
+
     // Saves inserts information from a Purchase object into the Purchases database
-    public void savePurchase(Purchase purchase) {
+    public boolean savePurchase(Purchase purchase) {
 
         String sql = "INSERT INTO Purchases (movie, ticketAmount, firstName, lastName, phoneNumber, mail) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
 
-        database.update(sql, purchase.getMovie(), purchase.getTicketAmount(), purchase.getFirstName(),
-                purchase.getLastName(), purchase.getPhoneNumber(), purchase.getMail());
+        // try catch in case an error happens
+        try {
+
+            database.update(sql, purchase.getMovie(), purchase.getTicketAmount(), purchase.getFirstName(),
+                    purchase.getLastName(), purchase.getPhoneNumber(), purchase.getMail());
+
+            return true;
+
+        }
+        catch(Exception e) {
+
+            logger.error("Error in savePurchase: " + e);
+
+            return false;
+
+        }
 
     }
+
 
     // returns a list of all rows in the Purchases database as Purchase objects sorted by lastName
     public List<Purchase> getAllPurchases() {
 
         String sql = "SELECT * FROM Purchases ORDER BY lastName";
 
-        return database.query(sql, new BeanPropertyRowMapper<>(Purchase.class));
+        // try catch in case an error happens
+        try {
+
+            return database.query(sql, new BeanPropertyRowMapper<>(Purchase.class));
+
+        }
+        catch(Exception e) {
+
+            logger.error("Error in getAllPurchases: " + e);
+
+            return null;
+
+        }
 
     }
 
+
     // deletes all Purchases from the Purchases database
-    public void deleteAllPurchases() {
+    public boolean deleteAllPurchases() {
 
         String sql = "DELETE FROM Purchases";
 
-        database.update(sql);
+        // try catch in case an error happens
+        try {
+
+            database.update(sql);
+
+            return true;
+
+        }
+        catch(Exception e) {
+
+            logger.error("Error in deleteAllPurchases: " + e);
+
+            return false;
+
+        }
 
     }
 
-    // deletes all Purchases from the Purchases database
-    public void deletePurchase(Long id) {
+
+    // deletes a Purchase from the Purchases database
+    public boolean deletePurchase(Long id) {
 
         String sql = "DELETE FROM Purchases WHERE id = ?";
 
-        database.update(sql, id);
+        // try catch in case an error happens
+        try {
+
+            database.update(sql, id);
+
+            return true;
+
+        }
+        catch (Exception e) {
+
+            logger.error("Error in deletePurchase: " + e);
+
+            return false;
+
+        }
 
     }
 
-    // updates a selected Purchase
-    public void updatePurchase(Purchase purchase) {
+    // Updates a selected Purchase in the Purchases database
+    public boolean updatePurchase(Purchase purchase) {
 
         String sql = "UPDATE Purchases SET movie=?, ticketAmount=?, firstName=?, lastName=?, phoneNumber=?, mail=? WHERE id=?";
 
-        database.update(sql, purchase.getMovie(), purchase.getTicketAmount(), purchase.getFirstName(),
-                purchase.getLastName(), purchase.getPhoneNumber(), purchase.getMail(), purchase.getId());
+        // try catch in case an error happens
+        try {
+
+            database.update(sql, purchase.getMovie(), purchase.getTicketAmount(), purchase.getFirstName(),
+                    purchase.getLastName(), purchase.getPhoneNumber(), purchase.getMail(), purchase.getId());
+
+            return true;
+
+        }
+        catch (Exception e) {
+
+            logger.error("Error in updatePurchase: " + e);
+
+            return false;
+
+        }
 
     }
 

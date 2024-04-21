@@ -5,6 +5,9 @@
 // A function that saves a purchase on the server
 function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity, phoneNumberValidity, mailValidity) {
 
+    // the error field, in case something goes wrong
+    const errorField = $("#error");
+
 
     // All input elements are given names for easier access
     const ticketAmountInput = $("#ticket-amount");
@@ -39,6 +42,14 @@ function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity,
             phoneNumberInput.val(null);
             mailInput.val(null);
 
+        }).fail(function(jqXHR) {
+            // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+            console.log(JSON.parse(jqXHR.responseText).message);
+
+            errorField.text("Oh dear. Something went wrong, try again later");
+            errorField.show();
+
         });
 
     }
@@ -49,8 +60,16 @@ function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity,
 // writes all saved registered purchases
 function writeAllPurchases() {
 
+    // the error field, in case something goes wrong
+    const errorField = $("#error");
+
+
     // retrieves a list of all registered purchases and writes them
     $.get("/getAllPurchases", function(registeredPurchases) {
+
+        // Upon success the error field is hidden
+        errorField.hide();
+
 
         let purchaseTable = "";
 
@@ -86,12 +105,24 @@ function writeAllPurchases() {
         // writes all the rows into the registered purchases table
         $("#registered-purchases").html(purchaseTable);
 
+    }).fail(function(jqXHR) {
+        // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+        console.log(JSON.parse(jqXHR.responseText).message);
+
+        errorField.text("Oh dear. Something went wrong, try again later");
+        errorField.show();
+
     });
 }
 
 
 // Function that restarts the Registered purchases table
 function deleteAllPurchases() {
+
+    // the error field, in case something goes wrong
+    const errorField = $("#error");
+
 
     // deletes all purchases and then runs writePurchases() so the table is emptied
     $.ajax({
@@ -103,6 +134,14 @@ function deleteAllPurchases() {
 
         writeAllPurchases();
 
+    }).fail(function(jqXHR) {
+        // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+        console.log(JSON.parse(jqXHR.responseText).message);
+
+        errorField.text("Oh dear. Something went wrong, try again later");
+        errorField.show();
+
     });
 
 }
@@ -110,6 +149,10 @@ function deleteAllPurchases() {
 
 // Function that deletes a selected purchase
 function deletePurchase(id) {
+
+    // the error field, in case something goes wrong
+    const errorField = $("#error");
+
 
     const url = "/deletePurchase?id=" + id;
 
@@ -122,6 +165,14 @@ function deletePurchase(id) {
     }).done(function() {
 
         writeAllPurchases();
+
+    }).fail(function(jqXHR) {
+        // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+        console.log(JSON.parse(jqXHR.responseText).message);
+
+        errorField.text("Oh dear. Something went wrong, try again later");
+        errorField.show();
 
     });
 
@@ -142,6 +193,10 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
 
     // If all the validation functions have returned false, everything is valid and the purchase can be saved
     if (!ticketAmountValidity && !firstNameValidity && !lastNameValidity && !phoneNumberValidity && !mailValidity) {
+
+
+        // the error field, in case something goes wrong
+        const errorField = $("#error");
 
         // a javascript object matching the custom java object Purchase
         const purchase = {
@@ -172,6 +227,14 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
             phoneNumberInput.val(null);
             mailInput.val(null);
 
+        }).fail(function(jqXHR) {
+            // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+            console.log(JSON.parse(jqXHR.responseText).message);
+
+            errorField.text("Oh dear. Something went wrong, try again later");
+            errorField.show();
+
         });
 
     }
@@ -181,6 +244,11 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
 
 // Function that initializes the select element for movies
 function getMovies() {
+
+
+    // the error field, in case something goes wrong
+    const errorField = $("#error");
+
 
     // retrieves a list of all movies and writes them
     $.get("/getMovies", function(movieList) {
@@ -194,6 +262,14 @@ function getMovies() {
         }
 
         $("#movie").html(movieSelect);
+
+    }).fail(function(jqXHR) {
+        // if something goes wrong info about the error gets logged, while an error message is shown on the page
+
+        console.log(JSON.parse(jqXHR.responseText).message);
+
+        errorField.text("Oh dear. Something went wrong on page initialization, try refreshing the page")
+        errorField.show();
 
     });
 

@@ -1,4 +1,4 @@
-/* This stylesheet hides all input warnings by default using their IDs to do so */
+/* This stylesheet hides all input warnings and the error element by default using their IDs to do so */
 
 #invalid-ticket-amount {
     display: none;
