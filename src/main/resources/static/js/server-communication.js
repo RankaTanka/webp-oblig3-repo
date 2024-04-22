@@ -3,18 +3,19 @@
 
 
 // A function that saves a purchase on the server
-function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity, phoneNumberValidity, mailValidity) {
+function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity, phoneNumberValidity, mailValidity,
+                      inputId) {
 
     // the error field, in case something goes wrong
     const errorField = $("#error");
 
 
     // All input elements are given names for easier access
-    const ticketAmountInput = $("#ticket-amount");
-    const firstNameInput = $("#first-name");
-    const lastNameInput = $("#last-name");
-    const phoneNumberInput = $("#phone-number");
-    const mailInput = $("#mail");
+    const ticketAmountInput = $("#ticket-amount-" + inputId);
+    const firstNameInput = $("#first-name-" + inputId);
+    const lastNameInput = $("#last-name-" + inputId);
+    const phoneNumberInput = $("#phone-number-" + inputId);
+    const mailInput = $("#mail-" + inputId);
 
 
     // If all the validation functions have returned false, everything is valid and the purchase can be saved
@@ -22,7 +23,7 @@ function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity,
 
         // a javascript object matching the custom java object Purchase, but without id
         const purchase = {
-            movie: $("#movie").val(),
+            movie: $("#movie-" + inputId).val(),
             ticketAmount: ticketAmountInput.val(),
             firstName: firstNameInput.val(),
             lastName: lastNameInput.val(),
@@ -31,7 +32,7 @@ function savePurchase(ticketAmountValidity, firstNameValidity, lastNameValidity,
         };
 
         // posts a purchase, writes all purchases into their table and resets input fields
-        $.post("/savePurchase", purchase, function () {
+        $.post("/savePurchase", purchase, function() {
 
             writeAllPurchases();
 
@@ -76,25 +77,24 @@ function writeAllPurchases() {
         // formats each registered purchase into a table row with an Update and a Delete button
         for (const purchase of registeredPurchases) {
 
-            purchaseTable += "<tr>" +
+            purchaseTable += "<tr id='" + purchase.id + "'>" +
 
                 // Purchase information
-                "<td>" + purchase.movie + "</td>" +
-                "<td>" + purchase.ticketAmount + "</td>" +
-                "<td>" + purchase.firstName + "</td>" +
-                "<td>" + purchase.lastName + "</td>" +
-                "<td>" + purchase.phoneNumber + "</td>" +
-                "<td>" + purchase.mail + "</td>" +
+                "<td class='align-middle'>" + purchase.movie + "</td>" +
+                "<td class='align-middle'>" + purchase.ticketAmount + "</td>" +
+                "<td class='align-middle'>" + purchase.firstName + "</td>" +
+                "<td class='align-middle'>" + purchase.lastName + "</td>" +
+                "<td class='align-middle'>" + purchase.phoneNumber + "</td>" +
+                "<td class='align-middle'>" + purchase.mail + "</td>" +
 
                 // A button that takes info from the input fields and updates its assigned Purchase
-                "<td class='text-center'><button class='btn btn-primary' value='" + purchase.id + "' " +
-                "onclick='updatePurchase(ticketAmountValidation(), firstNameValidation(), " +
-                "lastNameValidation(), phoneNumberValidation(), mailValidation(), this.value)'" +
+                "<td class='text-center'><button class='btn btn-primary' " +
+                "onclick='getPurchaseEditor(" + purchase.id + ")'" +
                 ">Update</button></td>" +
 
                 // A button that deletes its assigned Purchase
-                "<td class='text-center'><button class='btn btn-danger' value='" + purchase.id +
-                "' onclick='deletePurchase(this.value)'>Delete</button></td>"+
+                "<td class='text-center'><button class='btn btn-danger' " +
+                "onclick='deletePurchase(" + purchase.id + ")'>Delete</button></td>"+
 
                 "</tr>";
 
@@ -117,6 +117,24 @@ function writeAllPurchases() {
 }
 
 
+// Function
+function getPurchaseEditor(id) {
+
+
+    const url = "/getPurchase?id=" + id;
+
+    //
+    $.get(url, function(purchase) {
+
+        let purchaseEditor = "<td class='align-middle' type='" + purchase.id + "'>" + purchase.movie + "</td>";
+
+
+
+    });
+
+}
+
+
 // Function that restarts the Registered purchases table
 function deleteAllPurchases() {
 
@@ -128,7 +146,7 @@ function deleteAllPurchases() {
     $.ajax({
 
         url: "/deleteAllPurchases",
-        method: "DELETE",
+        type: "DELETE",
 
     }).done(function() {
 
@@ -160,7 +178,7 @@ function deletePurchase(id) {
     $.ajax({
 
         url: url,
-        method: "DELETE"
+        type: "DELETE"
 
     }).done(function() {
 
@@ -213,7 +231,7 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
         $.ajax({
 
             url: "/updatePurchase",
-            method: "PUT",
+            type: "PUT",
             data: purchase
 
         }).done(function() {
@@ -243,7 +261,7 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
 
 
 // Function that initializes the select element for movies
-function getMovies() {
+function getMovies(selectorId) {
 
 
     // the error field, in case something goes wrong
@@ -261,7 +279,7 @@ function getMovies() {
 
         }
 
-        $("#movie").html(movieSelect);
+        $("#movie-" + selectorId).html(movieSelect);
 
     }).fail(function(jqXHR) {
         // if something goes wrong info about the error gets logged, while an error message is shown on the page

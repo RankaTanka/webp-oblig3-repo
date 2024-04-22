@@ -18,7 +18,7 @@ public class MovieRepository {
     private JdbcTemplate database;
 
     // A Logger that reports whenever an error happens
-    Logger logger = LoggerFactory.getLogger(MovieRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(MovieRepository.class);
 
 
     // Returns a list of all movies to the controller

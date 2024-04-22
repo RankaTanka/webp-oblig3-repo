@@ -36,7 +36,7 @@ public class PurchaseController {
     }
 
 
-    // sends all registered purchases back to the view-side
+    // sends all registered Purchases back to the view-side
     @GetMapping("/getAllPurchases")
     public List<Purchase> getAllPurchases(HttpServletResponse response) throws IOException {
 
@@ -55,7 +55,26 @@ public class PurchaseController {
     }
 
 
-    // deletes all registered purchases
+    // gets a selected Purchase
+    @GetMapping("/getPurchase")
+    public Purchase getPurchase(Long id, HttpServletResponse response) throws IOException {
+
+        Purchase purchase = repository.getPurchase(id);
+
+        // In case an error has occurred
+        if (purchase == null) {
+
+            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Something went wrong with the Purchases DB - try again later");
+
+        }
+
+        return purchase;
+
+    }
+
+
+    // deletes all registered Purchases
     @DeleteMapping("/deleteAllPurchases")
     public void deleteAllPurchases(HttpServletResponse response) throws IOException {
 

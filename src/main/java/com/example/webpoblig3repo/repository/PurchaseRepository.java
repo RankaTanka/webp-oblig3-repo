@@ -21,7 +21,7 @@ public class PurchaseRepository {
     private JdbcTemplate database;
 
     // A Logger that reports whenever an error happens
-    Logger logger = LoggerFactory.getLogger(PurchaseRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(PurchaseRepository.class);
 
 
     // Saves inserts information from a Purchase object into the Purchases database
@@ -69,6 +69,27 @@ public class PurchaseRepository {
 
         }
 
+    }
+
+
+    // retrieves a selected Purchase
+    public Purchase getPurchase(Long id) {
+
+        String sql = "SELECT * FROM Purchases WHERE id = ?";
+
+        // try catch in case an error happens
+        try {
+
+            return database.queryForObject(sql, Purchase.class, id);
+
+        }
+        catch (Exception e) {
+
+            logger.error("Error in getPurchase: ");
+
+            return null;
+
+        }
     }
 
 

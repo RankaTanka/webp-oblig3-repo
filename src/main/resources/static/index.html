@@ -35,65 +35,66 @@
     <section>
 
         <div class="form-group">
-            <label for="movie">Movie and number of tickets:</label>
+            <label for="movie-default">Movie and number of tickets:</label>
 
             <div class="input-group">
                 <!-- this is the movie select element, it lets you choose between four movies -->
-                <select class="form-control" id="movie" title="Choose the movie you want to watch"></select>
+                <select class="form-control" id="movie-default" title="Choose the movie you want to watch"></select>
 
                 <!-- this is the Tickets input element, it only accepts integers that are 1 or higher -->
-                <input type="number" class="form-control rounded-right" id="ticket-amount" value="1"
+                <input type="number" class="form-control rounded-right" id="ticket-amount-default" value="1"
                        title="Write amount of tickets you want to buy here" min="1">
             </div>
 
-            <small class="form-text text-danger" id="invalid-ticket-amount">Please enter a valid number</small>
+            <small class="form-text text-danger" id="invalid-ticket-amount-default"></small>
         </div>
 
 
         <!-- this is the First name input element, it only accepts values that consists of 2 or more letters -->
         <div class="form-group">
-            <label for="first-name">First name:</label>
-            <input type="text" class="form-control" id="first-name" placeholder="Name" title="Write your first name here"
-                   pattern="[a-zæøåA-ZÆØÅ]{2,}">
+            <label for="first-name-default">First name:</label>
+            <input type="text" class="form-control" id="first-name-default" placeholder="Name"
+                   title="Write your first name here" pattern="[a-zæøåA-ZÆØÅ]{2,}">
 
-            <small class="form-text text-danger" id="invalid-first-name">Please enter a valid first name</small>
+            <small class="form-text text-danger" id="invalid-first-name-default"></small>
         </div>
 
 
         <!-- this is the Last name input element, it only accepts values that consists of 2 or more letters -->
         <div class="form-group">
-            <label for="last-name">Last name:</label>
-            <input type="text" class="form-control" id="last-name" placeholder="Namington" title="Write your last name here"
-                   pattern="[a-zæøåA-ÅÆØÅ]{2,}">
+            <label for="last-name-default">Last name:</label>
+            <input type="text" class="form-control" id="last-name-default" placeholder="Namington"
+                   title="Write your last name here" pattern="[a-zæøåA-ÅÆØÅ]{2,}">
 
-            <small class="form-text text-danger" id="invalid-last-name">Please enter a valid last name</small>
+            <small class="form-text text-danger" id="invalid-last-name-default"></small>
         </div>
 
 
         <!-- this is the Phone number input element -->
         <!-- it only accepts values that consists of 8 digits where the first digit is not 0 -->
         <div class="form-group">
-            <label for="phone-number">Phone number:</label>
-            <input type="tel" class="form-control" id="phone-number" placeholder="12345678" title="Write your phone number here"
-                       pattern="[1-9]{1}[\d]{7}">
+            <label for="phone-number-default">Phone number:</label>
+            <input type="tel" class="form-control" id="phone-number-default" placeholder="12345678"
+                   title="Write your phone number here" pattern="[1-9]{1}[\d]{7}">
 
-            <small class="form-text text-danger" id="invalid-phone-number">Please enter a valid phone number</small>
+            <small class="form-text text-danger" id="invalid-phone-number-default"></small>
         </div>
 
 
         <!-- this is the Mail input element, it only accepts emails -->
         <div class="form-group">
-            <label for="mail">Email:</label>
-            <input type="email" class="form-control" id="mail" placeholder="name@example.com" title="Write your email here"
-                   pattern="[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,3}">
+            <label for="mail-default">Email:</label>
+            <input type="email" class="form-control" id="mail-default" placeholder="name@example.com"
+                   title="Write your email here" pattern="[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,3}">
 
-            <small class="form-text text-danger" id="invalid-mail">Please enter a valid email</small>
+            <small class="form-text text-danger" id="invalid-mail-default"></small>
         </div>
 
         <!-- button which when pressed runs the savePurchase() function with all the validation functions -->
         <!-- (it tries to save a purchase if all inputs are valid) -->
-        <button class="btn btn-primary" onclick="savePurchase(ticketAmountValidation(), firstNameValidation(),
-               lastNameValidation(), phoneNumberValidation(), mailValidation())">Register purchase</button>
+        <button class="btn btn-primary" onclick="savePurchase(ticketAmountValidation('default'),
+               firstNameValidation('default'), lastNameValidation('default'), phoneNumberValidation('default'),
+               mailValidation('default'), 'default')">Register purchase</button>
 
         <!-- button which when pressed runs the deleteAllPurchases() function -->
         <button class="btn btn-danger" onclick="deleteAllPurchases()">Remove purchases</button>
@@ -121,6 +122,20 @@
                     <th></th>
                     <th></th>
                 </tr>
+
+
+                <tr class="form-group">
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td><input class="form-control form-control-sm"/></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
             </thead>
             <tbody id="registered-purchases"></tbody>
         </table>
