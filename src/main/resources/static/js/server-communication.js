@@ -119,6 +119,7 @@ function writeAllPurchases() {
             errorField.text("Oh dear. Something went wrong, try again later");
             errorField.show();
 
+
             // rejects the function after failure
             reject();
 
