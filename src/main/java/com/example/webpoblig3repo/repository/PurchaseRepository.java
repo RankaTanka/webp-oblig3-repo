@@ -71,7 +71,6 @@ public class PurchaseRepository {
 
     }
 
-
     // retrieves a selected Purchase
     public Purchase getPurchase(Long id) {
 
@@ -80,12 +79,13 @@ public class PurchaseRepository {
         // try catch in case an error happens
         try {
 
-            return database.queryForObject(sql, Purchase.class, id);
+            List<Purchase> purchaseList = database.query(sql, new BeanPropertyRowMapper<>(Purchase.class), id);
+            return purchaseList.get(0);
 
         }
         catch (Exception e) {
 
-            logger.error("Error in getPurchase: ");
+            logger.error("Error in getPurchase: " + e);
 
             return null;
 

@@ -89,8 +89,7 @@ function writeAllPurchases() {
 
                 // A button that takes info from the input fields and updates its assigned Purchase
                 "<td class='text-center'><button class='btn btn-primary' " +
-                "onclick='getPurchaseEditor(" + purchase.id + ")'" +
-                ">Update</button></td>" +
+                "onclick='getPurchaseEditor(" + purchase.id + ")'>Edit</button></td>" +
 
                 // A button that deletes its assigned Purchase
                 "<td class='text-center'><button class='btn btn-danger' " +
@@ -126,9 +125,44 @@ function getPurchaseEditor(id) {
     //
     $.get(url, function(purchase) {
 
-        let purchaseEditor = "<td class='align-middle' type='" + purchase.id + "'>" + purchase.movie + "</td>";
+        const purchaseEditor = "<td>" +
+                "<select class='form-control form-control-sm' id='movie-" + id + "'>" +
+                    "<option>" + purchase.movie + "</option>" +
+                "</select>" +
+            "</td>" +
+            "<td>" +
+                "<input class='form-control form-control-sm' id='ticket-amount-" + id + "' value='" + purchase.ticketAmount + "'/>" +
+            "</td>" +
+            "<td>" +
+                "<input class='form-control form-control-sm' id='first-name-" + id + "' value='" + purchase.firstName + "'/>" +
+            "</td>" +
+            "<td>" +
+                "<input class='form-control form-control-sm' id='last-name-" + id + "' value='" + purchase.lastName + "'/>" +
+            "</td>" +
+            "<td>" +
+                "<input class='form-control form-control-sm' id='phone-number-" + id + "' value='" + purchase.phoneNumber + "'/>" +
+            "</td>" +
+            "<td>" +
+                "<input class='form-control form-control-sm' id='mail-" + id + "' value='" + purchase.mail + "'/>" +
+            "</td>" +
+
+            // Update button when editing is done
+            "<td class='text-center'>" +
+                "<button class='btn btn-secondary' onClick='updatePurchase(ticketAmountValidation(" + purchase.id + "), " +
+                "firstNameValidation(" + purchase.id + "), lastNameValidation(" + purchase.id + "), " +
+                "phoneNumberValidation(" + purchase.id + "), mailValidation(" + purchase.id + "), " +
+            "   " + purchase.id + ")'>Update</button>" +
+            "</td>" +
+
+            // Delete button
+            "<td class='text-center'>" +
+                "<button class='btn btn-danger' onclick='deletePurchase(" + purchase.id + ")'>Delete</button>" +
+            "</td>";
+
+        $("#" + id).html(purchaseEditor);
 
 
+        getMovies(id);
 
     });
 
@@ -202,11 +236,11 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
                         id) {
 
     // All input elements are given names for easier access
-    const ticketAmountInput = $("#ticket-amount");
-    const firstNameInput = $("#first-name");
-    const lastNameInput = $("#last-name");
-    const phoneNumberInput = $("#phone-number");
-    const mailInput = $("#mail");
+    const ticketAmountInput = $("#ticket-amount-" + id);
+    const firstNameInput = $("#first-name-" + id);
+    const lastNameInput = $("#last-name-" + id);
+    const phoneNumberInput = $("#phone-number-" + id);
+    const mailInput = $("#mail-" + id);
 
 
     // If all the validation functions have returned false, everything is valid and the purchase can be saved
@@ -219,7 +253,7 @@ function updatePurchase(ticketAmountValidity, firstNameValidity, lastNameValidit
         // a javascript object matching the custom java object Purchase
         const purchase = {
             id: id,
-            movie: $("#movie").val(),
+            movie: $("#movie-" + id).val(),
             ticketAmount: ticketAmountInput.val(),
             firstName: firstNameInput.val(),
             lastName: lastNameInput.val(),
