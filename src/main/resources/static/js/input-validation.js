@@ -17,8 +17,20 @@ function ticketAmountValidation(inputId) {
 
         ticketAmountValidity = true;
 
-        ticketAmountInput.val(1);
-        $("#invalid-ticket-amount-" + inputId).text("Please enter a valid number");
+
+        // Makes sure the correct "invalid input" message is displayed and thing happens depending on which input is wrong
+        if (inputId === "default") {
+
+            $("#invalid-ticket-amount-" + inputId).text("Please enter a valid amount");
+
+            ticketAmountInput.val(1);
+
+        }
+        else {
+
+            $("#invalid-ticket-amount-" + inputId).text("Invalid input");
+
+        }
     }
     // Every time the input is valid the message gets removed
     else {
@@ -44,8 +56,20 @@ function firstNameValidation(inputId) {
 
         firstNameValidity = true;
 
-        firstNameInput.val(null);
-        $("#invalid-first-name-" + inputId).text("Please enter a valid first name");
+
+        // Makes sure the correct "invalid input" message is displayed and thing happens depending on which input is wrong
+        if (inputId === "default") {
+
+            $("#invalid-first-name-" + inputId).text("Please enter a valid first name");
+
+            firstNameInput.val(null);
+
+        }
+        else {
+
+            $("#invalid-first-name-" + inputId).text("Invalid input");
+
+        }
 
     }
     else {
@@ -71,8 +95,20 @@ function lastNameValidation(inputId) {
 
         lastNameValidity = true;
 
-        lastNameInput.val(null);
-        $("#invalid-last-name-" + inputId).text("Please enter a valid last name");
+
+        // Makes sure the correct "invalid input" message is displayed and thing happens depending on which input is wrong
+        if (inputId === "default") {
+
+            $("#invalid-last-name-" + inputId).text("Please enter a valid last name");
+
+            lastNameInput.val(null);
+
+        }
+        else {
+
+            $("#invalid-last-name-" + inputId).text("Invalid input");
+
+        }
 
     }
     else {
@@ -98,8 +134,20 @@ function phoneNumberValidation(inputId) {
 
         phoneNumberValidity = true;
 
-        phoneNumberInput.val(null);
-        $("#invalid-phone-number-" + inputId).text("Please enter a valid phone number");
+
+        // Makes sure the correct "invalid input" message is displayed and thing happens depending on which input is wrong
+        if (inputId === "default") {
+
+            $("#invalid-phone-number-" + inputId).text("Please enter a valid phone number");
+
+            phoneNumberInput.val(null);
+
+        }
+        else {
+
+            $("#invalid-phone-number-" + inputId).text("Invalid input");
+
+        }
 
     }
     else {
@@ -126,8 +174,19 @@ function mailValidation(inputId) {
 
         mailValidity = true;
 
-        mailInput.val(null);
-        $("#invalid-mail-" + inputId).text("Please enter a valid email");
+
+        // Makes sure the correct "invalid input" message is displayed and thing happens depending on which input is wrong
+        if (inputId === "default") {
+
+            $("#invalid-mail-" + inputId).text("Please enter a valid email");
+
+            mailInput.val(null);
+
+        }
+        else {
+            $("#invalid-mail-" + inputId).text("Invalid input");
+        }
+
     }
     else {
         $("#invalid-mail-" + inputId).text(null);

@@ -4,7 +4,7 @@
 
 // When the page is loaded the select list and all purchases are written
 $(function() {
-    getMovies('default');
+    getMoviesForInit();
     writeAllPurchases();
 });
 

@@ -79,8 +79,7 @@ public class PurchaseRepository {
         // try catch in case an error happens
         try {
 
-            List<Purchase> purchaseList = database.query(sql, new BeanPropertyRowMapper<>(Purchase.class), id);
-            return purchaseList.get(0);
+            return database.query(sql, new BeanPropertyRowMapper<>(Purchase.class), id).get(0);
 
         }
         catch (Exception e) {

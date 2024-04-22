@@ -22,10 +22,10 @@ public class MovieController {
 
 
     // send a list of movies to the view side
-    @GetMapping("/getMovies")
-    public List<String> getMovies(HttpServletResponse response) throws IOException {
+    @GetMapping("/getMoviesForInit")
+    public List<String> getMoviesForInit(HttpServletResponse response) throws IOException {
 
-        List<String> movieList = repository.getMovies();
+        List<String> movieList = repository.getMoviesForInit();
 
         // In case an error has happened
         if (movieList == null) {
@@ -39,4 +39,20 @@ public class MovieController {
 
     }
 
+    // retrieves a list of movies not containing the selected movie assigned to the Purchase being edited
+    @GetMapping("/getMoviesForEditor")
+    public List<String> getMoviesForEditor(Long id, HttpServletResponse response) throws IOException {
+
+        List<String> movieList = repository.getMoviesForEditor(id);
+
+        // In case an error has happened
+        if (movieList == null) {
+
+            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    "Something went wrong with the Movies DB - try again later");
+
+        }
+
+        return movieList;
+    }
 }
