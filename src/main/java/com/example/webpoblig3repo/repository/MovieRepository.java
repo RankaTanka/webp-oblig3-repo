@@ -46,7 +46,7 @@ public class MovieRepository {
     public List<String> getMoviesForEditor(Long id) {
 
         String sql = "SELECT DISTINCT Movies.movie FROM Movies LEFT OUTER JOIN Purchases " +
-                "ON Purchases.movie = Movies.movie WHERE id <> ? OR id IS NULL";
+                "ON Purchases.movie = Movies.movie WHERE id <> ? AND Movies.movie <> Purchases.movie OR id IS NULL";
 
         // try catch in case an error occurs
         try {
