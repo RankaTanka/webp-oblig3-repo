@@ -15,3 +15,7 @@ Each registered and shown purchase will be assigned a button labeled "Delete" an
 
 ## Editing purchases
 Each registered and show purchase will also be assigned a button labeled "Edit" if the button is clicked input fields connected to the purchase will appear as well as a button labaled "Update". You can then edit the input fields and update the purchase if your inputs are valid
+
+
+## Link to video of the website in use
+https://www.youtube.com/watch?v=vKo7P3CLgdw
