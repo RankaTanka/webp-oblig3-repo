@@ -1,4 +1,4 @@
-﻿# oblig-repo
+﻿# webp-oblig3-repo
 This is a project regarding input validation and implementation. It consists of a locally hosted website where you can choose a movie, and write a number of tickets and some pruchase information and register it if it's valid. It has some different functions that are explained below
 
 ## Installation
