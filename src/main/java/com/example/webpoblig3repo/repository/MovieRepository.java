@@ -53,14 +53,14 @@ public class MovieRepository {
                     "SELECT DISTINCT Movies.movie " +
                     "FROM Movies LEFT OUTER JOIN Purchases " +
                     "ON Purchases.movie = Movies.movie " +
-                    "WHERE id = 1" +
+                    "WHERE id = ?" +
                 ") " +
                 "OR id IS NULL";
 
         // try catch in case an error occurs
         try {
 
-            return database.queryForList(sql, String.class, id);
+            return database.queryForList(sql, String.class, id, id);
 
         }
         catch (Exception e) {
