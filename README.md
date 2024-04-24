@@ -18,4 +18,4 @@ Each registered and show purchase will also be assigned a button labeled "Edit" 
 
 
 ## Link to video of the website in use
-https://www.youtube.com/watch?v=zfHeoCId_18
+https://www.youtube.com/watch?v=K4JuxTIv0eM
