@@ -45,8 +45,17 @@ public class MovieRepository {
     // retrieves a list of movies not containing the selected movie assigned to the Purchase being edited
     public List<String> getMoviesForEditor(Long id) {
 
-        String sql = "SELECT DISTINCT Movies.movie FROM Movies LEFT OUTER JOIN Purchases " +
-                "ON Purchases.movie = Movies.movie WHERE id <> ? AND Movies.movie <> Purchases.movie OR id IS NULL";
+        // SQL statement that selects all movies but the one selected no matter what
+        String sql = "SELECT DISTINCT Movies.movie " +
+                "FROM Movies LEFT OUTER JOIN Purchases " +
+                "ON Purchases.movie = Movies.movie " +
+                "WHERE id <> ? AND Movies.movie <> (" +
+                    "SELECT DISTINCT Movies.movie " +
+                    "FROM Movies LEFT OUTER JOIN Purchases " +
+                    "ON Purchases.movie = Movies.movie " +
+                    "WHERE id = 1" +
+                ") " +
+                "OR id IS NULL";
 
         // try catch in case an error occurs
         try {

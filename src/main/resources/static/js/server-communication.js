@@ -131,7 +131,7 @@ function writeAllPurchases() {
 // Function for turning a selected row in the Registered purchases table into a row for editing its assigned Purchase
 async function getPurchaseEditor(id) {
 
-    // First restores all Purchases in the purchases table so that only one can be edited at a time, then proceeds
+    // Restores all Purchases in the purchases table so that only one can be edited at a time
     await writeAllPurchases();
 
     // the error field, in case something goes wrong
@@ -221,7 +221,7 @@ function deleteAllPurchases() {
     $.ajax({
 
         url: "/deleteAllPurchases",
-        type: "DELETE",
+        type: "DELETE"
 
     }).done(function() {
 

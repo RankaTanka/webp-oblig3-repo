@@ -142,7 +142,8 @@ public class PurchaseRepository {
     // Updates a selected Purchase in the Purchases database
     public boolean updatePurchase(Purchase purchase) {
 
-        String sql = "UPDATE Purchases SET movie=?, ticketAmount=?, firstName=?, lastName=?, phoneNumber=?, mail=? WHERE id=?";
+        String sql = "UPDATE Purchases SET movie=?, ticketAmount=?, firstName=?, lastName=?, phoneNumber=?, mail=? " +
+                "WHERE id=?";
 
         // try catch in case an error happens
         try {
